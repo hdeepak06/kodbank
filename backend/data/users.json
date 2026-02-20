@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1771523935779,
+    "name": "Test User",
+    "email": "test@kodbank.com",
+    "password": "$2b$10$cnGDmRKvFAugzAa9CilZ3uqGIoDk2jVmswQzJcAwtbJ7p/s7Eb5IS",
+    "balance": 850,
+    "userToken": ""
+  },
+  {
+    "id": 2,
+    "name": "Recipient Account",
+    "email": "recipient@kodbank.com",
+    "password": "$2b$10$HQTx2ga39yj/YRq4j3bOtu3AywCSMdiLf3NvWAIKsXMjk25uDzPJq",
+    "balance": 700,
+    "userToken": ""
+  },
+  {
+    "id": 1771524616168,
+    "name": "deepak",
+    "email": "deepak@gmail.com",
+    "password": "$2b$10$/Ne2cnH6bbX2/gY3vUyRN.0ZqXzpgte9QZRZ36DgFlWSZ4XqhL8li",
+    "balance": 1000,
+    "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTUyNDYxNjE2OCwibmFtZSI6ImRlZXBhayIsImVtYWlsIjoiZGVlcGFrQGdtYWlsLmNvbSIsImlhdCI6MTc3MTU2MDQ4NCwiZXhwIjoxNzcxNTY0MDg0fQ.H5mGDr8p3WXKtKORKDW2t0K0louGqFhdOkryqSKDt5k"
+  },
+  {
+    "id": 1771559795309,
+    "name": "Test User",
+    "email": "testuser_final@example.com",
+    "password": "$2b$10$u1zYiU3cvaqKMQpPIGh.B.7uH/LHNtoy5cIuHYGNFjyw3nsWpm4SS",
+    "balance": 1000,
+    "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTU1OTc5NTMwOSwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdHVzZXJfZmluYWxAZXhhbXBsZS5jb20iLCJpYXQiOjE3NzE1NTk3OTUsImV4cCI6MTc3MTU2MzM5NX0.px2Fj-witUEUE47RPQwv3oAxLY9wivT9WNvcn3B5dRI"
+  },
+  {
+    "id": 1771560101616,
+    "name": "Test User",
+    "email": "vitor_final_test@example.com",
+    "password": "$2b$10$l18ATAqa7Jkx8k.JbWL8keuN/klRVauo9uAEUKfJGgu8wzMyn8wby",
+    "balance": 950,
+    "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTU2MDEwMTYxNiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidml0b3JfZmluYWxfdGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc3MTU2MDEwMSwiZXhwIjoxNzcxNTYzNzAxfQ.lzFobwmUUIfHhNOyjOXIKgQqYgZyhxLf9mNkkT_BfIM"
+  },
+  {
+    "id": 1771560214685,
+    "name": "Test User 456",
+    "email": "user456@example.com",
+    "password": "$2b$10$gOrVkS7WrfrDHWorG5xeVOL9udIzv/ekYG4ydTdAp2p3N4aycQP3G",
+    "balance": 950,
+    "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTU2MDIxNDY4NSwibmFtZSI6IlRlc3QgVXNlciA0NTYiLCJlbWFpbCI6InVzZXI0NTZAZXhhbXBsZS5jb20iLCJpYXQiOjE3NzE1NjAyMTQsImV4cCI6MTc3MTU2MzgxNH0.SpuiKq3iHvZY0QbW7uX7niaDN0GlVvUkbsfMuAH9bKU"
+  }
+]
