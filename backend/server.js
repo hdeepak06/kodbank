@@ -7,13 +7,27 @@ const { getUsers, saveUsers, getTokens, saveTokens } = require('./db');
 const authenticateToken = require('./authMiddleware');
 
 const app = express();
-const PORT = 5000;
-const JWT_SECRET = 'kodbank_secret_key_123';
+const PORT = process.env.PORT || 5000;
+const JWT_SECRET = process.env.JWT_SECRET || 'kodbank_secret_key_123';
 
 app.use(express.json());
 app.use(cookieParser());
+
+// Dynamic CORS configuration for Vercel
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://kodbank.vercel.app', // You can update this with your actual Vercel URL
+    process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
-    origin: 'http://localhost:5173', // Vite default
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -198,6 +212,10 @@ app.post('/api/withdraw', authenticateToken, (req, res) => {
     res.json({ message: 'Withdrawal successful', newBalance: user.balance });
 });
 
-app.listen(PORT, () => {
-    console.log(`KodBank Server running on http://localhost:${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`KodBank Server running on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
