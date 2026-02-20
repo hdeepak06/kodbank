@@ -46,5 +46,13 @@
     "password": "$2b$10$gOrVkS7WrfrDHWorG5xeVOL9udIzv/ekYG4ydTdAp2p3N4aycQP3G",
     "balance": 950,
     "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTU2MDIxNDY4NSwibmFtZSI6IlRlc3QgVXNlciA0NTYiLCJlbWFpbCI6InVzZXI0NTZAZXhhbXBsZS5jb20iLCJpYXQiOjE3NzE1NjAyMTQsImV4cCI6MTc3MTU2MzgxNH0.SpuiKq3iHvZY0QbW7uX7niaDN0GlVvUkbsfMuAH9bKU"
+  },
+  {
+    "id": 1771562850240,
+    "name": "Browser Test",
+    "email": "browser_test@example.com",
+    "password": "$2b$10$IBhQZzuw8NyJfW7Ho523tePaX0GYDPUvjeF58gSsSVgDN1pBgDO86",
+    "balance": 1000,
+    "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTU2Mjg1MDI0MCwibmFtZSI6IkJyb3dzZXIgVGVzdCIsImVtYWlsIjoiYnJvd3Nlcl90ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzcxNTYyODUwLCJleHAiOjE3NzE1NjY0NTB9.i98MtB0BevKT8entBjTgP8Y2VKAv5lEZLsfBy_RHy58"
   }
 ]
