@@ -8,6 +8,7 @@ const authenticateToken = require('./authMiddleware');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
 const JWT_SECRET = process.env.JWT_SECRET || 'kodbank_secret_key_123';
 
 app.use(express.json());
@@ -151,6 +152,42 @@ app.get('/api/me', authenticateToken, (req, res) => {
 
     const { password, ...userWithoutPassword } = user;
     res.json({ user: userWithoutPassword });
+});
+
+let aiClient;
+(async () => {
+    try {
+        const { Client } = await import('@gradio/client');
+        aiClient = await Client.connect("hdeepak06/kodbank-ai");
+        console.log('✅ AI Assistant Connected & Ready');
+    } catch (err) {
+        console.error('❌ Failed to connect to AI Assistant:', err);
+    }
+})();
+
+// AI Assistant Route
+app.post("/api/ai-chat", authenticateToken, async (req, res) => {
+    try {
+        const { message } = req.body;
+
+        if (!aiClient) {
+            return res.status(503).json({ reply: "AI Assistant is still waking up, please try again in a second." });
+        }
+
+        const result = await aiClient.predict("/kodbank_ai", {
+            message: message,
+        });
+
+        res.json({
+            reply: result.data[0]
+        });
+
+    } catch (error) {
+        console.error('AI Error:', error);
+        res.status(500).json({
+            reply: "AI service unavailable"
+        });
+    }
 });
 
 // Money Transfer

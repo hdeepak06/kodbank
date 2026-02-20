@@ -11,6 +11,6 @@ export const logout = () => api.post('/logout');
 export const getMe = () => api.get('/me');
 export const getBalance = () => api.get('/balance');
 export const transferMoney = (data) => api.post('/transfer', data);
-export const withdrawMoney = (data) => api.post('/withdraw', data);
+export const postChat = (message) => api.post('/ai-chat', { message });
 
 export default api;

@@ -20,8 +20,8 @@
     "name": "deepak",
     "email": "deepak@gmail.com",
     "password": "$2b$10$/Ne2cnH6bbX2/gY3vUyRN.0ZqXzpgte9QZRZ36DgFlWSZ4XqhL8li",
-    "balance": 1000,
-    "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTUyNDYxNjE2OCwibmFtZSI6ImRlZXBhayIsImVtYWlsIjoiZGVlcGFrQGdtYWlsLmNvbSIsImlhdCI6MTc3MTU2MDQ4NCwiZXhwIjoxNzcxNTY0MDg0fQ.H5mGDr8p3WXKtKORKDW2t0K0louGqFhdOkryqSKDt5k"
+    "balance": 600000,
+    "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTUyNDYxNjE2OCwibmFtZSI6ImRlZXBhayIsImVtYWlsIjoiZGVlcGFrQGdtYWlsLmNvbSIsImlhdCI6MTc3MTU4NTM2NSwiZXhwIjoxNzcxNTg4OTY1fQ.1zD1tWPgAX6AqHW35o4BFaFCY-mmAeAGNNb3ZVfWuI4"
   },
   {
     "id": 1771559795309,
@@ -54,5 +54,21 @@
     "password": "$2b$10$IBhQZzuw8NyJfW7Ho523tePaX0GYDPUvjeF58gSsSVgDN1pBgDO86",
     "balance": 1000,
     "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTU2Mjg1MDI0MCwibmFtZSI6IkJyb3dzZXIgVGVzdCIsImVtYWlsIjoiYnJvd3Nlcl90ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzcxNTYyODUwLCJleHAiOjE3NzE1NjY0NTB9.i98MtB0BevKT8entBjTgP8Y2VKAv5lEZLsfBy_RHy58"
+  },
+  {
+    "id": 1771565697592,
+    "name": "deepak",
+    "email": "hdeepak.ise.rymec@gmail.com",
+    "password": "$2b$10$c0S9/Aqsv4LtCG1/fd86f.mcEEadTkBy..oEZz6PSJ3O/WDwOouk.",
+    "balance": 600000,
+    "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTU2NTY5NzU5MiwibmFtZSI6ImRlZXBhayIsImVtYWlsIjoiaGRlZXBhay5pc2UucnltZWNAZ21haWwuY29tIiwiaWF0IjoxNzcxNTY1Njk3LCJleHAiOjE3NzE1NjkyOTd9.5OaOeVpLZ9Zt4RW0XC53bAQAunOVjlzwNcO0gbbY5mg"
+  },
+  {
+    "id": 1771568677216,
+    "name": "Deepak Kumar",
+    "email": "deepak2@gmail.com",
+    "password": "$2b$10$AtVJNC3BiwKYADjNZ0SMeuKqMw9vXTMHLzwru8ixLqVzrfUajVoaK",
+    "balance": 1000,
+    "userToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MTU2ODY3NzIxNiwibmFtZSI6IkRlZXBhayBLdW1hciIsImVtYWlsIjoiZGVlcGFrMkBnbWFpbC5jb20iLCJpYXQiOjE3NzE1NzcyODcsImV4cCI6MTc3MTU4MDg4N30.w0mlsoEXhI6g3-pGRbaZaQWLDHGUNs01Xh06528qNcE"
   }
 ]

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../api';
-import { LogIn, Mail, Lock } from 'lucide-react';
+import { LogIn, Mail, Lock, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Login = ({ setUser }) => {
@@ -20,39 +20,57 @@ const Login = ({ setUser }) => {
             localStorage.setItem('user', JSON.stringify(data.user));
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || 'Login failed');
+            setError(err.response?.data?.message || 'Invalid email or password');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="page-center">
+        <div className="page-center animate-fade-in">
             <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="glass card"
-                style={{ maxWidth: '400px' }}
+                initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                className="card"
+                style={{ maxWidth: '440px', background: 'var(--surface)', position: 'relative' }}
             >
-                <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-                    <div style={{ background: 'rgba(168, 85, 247, 0.1)', width: '64px', height: '64px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
-                        <LogIn size={32} color="#a855f7" />
+                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                    <div style={{
+                        background: 'var(--primary-glow)',
+                        width: '72px',
+                        height: '72px',
+                        borderRadius: '20px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: '0 auto 24px',
+                        boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
+                    }}>
+                        <ShieldCheck size={36} color="var(--primary)" />
                     </div>
-                    <h2 style={{ fontSize: '1.8rem', fontWeight: 700 }}>Welcome Back</h2>
-                    <p style={{ color: 'var(--text-muted)' }}>Securely login to your account</p>
+                    <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#fff', marginBottom: '8px', letterSpacing: '-1px' }}>KodBank Access</h2>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '1rem' }}>Enter your credentials to manage your wealth.</p>
                 </div>
 
-                {error && <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: 'var(--error)', padding: '12px', borderRadius: '8px', marginBottom: '20px', fontSize: '0.9rem' }}>{error}</div>}
+                {error && (
+                    <motion.div
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        style={{ background: 'rgba(244, 63, 94, 0.1)', color: 'var(--error)', padding: '14px', borderRadius: '12px', marginBottom: '24px', fontSize: '0.9rem', border: '1px solid rgba(244, 63, 94, 0.2)', fontWeight: '500' }}
+                    >
+                        {error}
+                    </motion.div>
+                )}
 
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
-                        <label>Email Address</label>
+                        <label>Institutional Email</label>
                         <div style={{ position: 'relative' }}>
-                            <Mail size={18} style={{ position: 'absolute', left: '12px', top: '14px', color: 'var(--text-muted)' }} />
+                            <Mail size={20} style={{ position: 'absolute', left: '16px', top: '15px', color: 'var(--text-muted)', opacity: 0.7 }} />
                             <input
                                 type="email"
-                                placeholder="john@example.com"
-                                style={{ paddingLeft: '40px' }}
+                                placeholder="name@domain.com"
+                                style={{ paddingLeft: '48px' }}
                                 required
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -60,27 +78,35 @@ const Login = ({ setUser }) => {
                         </div>
                     </div>
                     <div className="input-group">
-                        <label>Password</label>
+                        <label>Security Password</label>
                         <div style={{ position: 'relative' }}>
-                            <Lock size={18} style={{ position: 'absolute', left: '12px', top: '14px', color: 'var(--text-muted)' }} />
+                            <Lock size={20} style={{ position: 'absolute', left: '16px', top: '15px', color: 'var(--text-muted)', opacity: 0.7 }} />
                             <input
                                 type="password"
                                 placeholder="••••••••"
-                                style={{ paddingLeft: '40px' }}
+                                style={{ paddingLeft: '48px' }}
                                 required
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             />
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '10px' }} disabled={loading}>
-                        {loading ? 'Logging in...' : 'Sign In'}
-                    </button>
+
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        type="submit"
+                        className="btn btn-primary"
+                        style={{ width: '100%', marginTop: '8px', fontSize: '1rem' }}
+                        disabled={loading}
+                    >
+                        {loading ? 'Authenticating...' : 'Sign In Protected'}
+                    </motion.button>
                 </form>
 
-                <p style={{ textAlign: 'center', marginTop: '24px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                    Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>Register</Link>
-                </p>
+                <div style={{ textAlign: 'center', marginTop: '32px', color: 'var(--text-muted)', fontSize: '0.95rem' }}>
+                    New to KodBank? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: 700, textDecoration: 'none', borderBottom: '1px solid currentColor' }}>Create Institutional Account</Link>
+                </div>
             </motion.div>
         </div>
     );

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getBalance } from '../api';
-import { Wallet, RefreshCw, TrendingUp, ShieldCheck, IndianRupee } from 'lucide-react';
+import { RefreshCw, TrendingUp, ShieldCheck, IndianRupee, ArrowUpRight, ArrowDownLeft, Wallet } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Dashboard = ({ user }) => {
@@ -24,107 +24,139 @@ const Dashboard = ({ user }) => {
         fetchBalance();
     }, []);
 
+    const stats = [
+        { label: 'Weekly Income', value: '+₹24,500', color: '#10b981', icon: ArrowDownLeft },
+        { label: 'Weekly Spent', value: '-₹12,400', color: '#f43f5e', icon: ArrowUpRight },
+        { label: 'Saving Goal', value: '85%', color: 'var(--primary)', icon: TrendingUp },
+    ];
+
     return (
-        <div className="container" style={{ paddingTop: '40px' }}>
-            <div style={{ marginBottom: '40px' }}>
-                <h1 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '8px' }}>Dashboard</h1>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>Welcome back, {user?.name || 'User'}.</p>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-                {/* Balance Card ... (skipping some for brevity but I should include the whole block I'm replacing) */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="glass card"
-                    style={{ background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2))', border: '1px solid rgba(255,255,255,0.2)' }}
+        <div className="container animate-fade-in" style={{ paddingTop: '60px', paddingBottom: '60px' }}>
+            {/* Header */}
+            <header style={{ marginBottom: '48px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                <div>
+                    <h1 style={{ fontSize: '2.8rem', fontWeight: 800, marginBottom: '8px' }}>Dashboard</h1>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>Welcome back, <span style={{ color: 'var(--primary)', fontWeight: 600 }}>{user?.name || 'Partner'}</span>. Here's your status.</p>
+                </div>
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={fetchBalance}
+                    className="btn btn-outline"
+                    style={{ padding: '10px 20px', fontSize: '0.85rem' }}
                 >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
-                        <div>
-                            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '4px' }}>Total Balance</p>
-                            <h2 style={{ fontSize: '2.5rem', fontWeight: 700 }}>
-                                {loading ? '...' : `₹${balance?.toLocaleString('en-IN')}`}
-                            </h2>
-                        </div>
-                        <div style={{ background: 'rgba(255,255,255,0.1)', p: '12px', borderRadius: '12px', padding: '12px' }}>
-                            <IndianRupee size={24} color="#6366f1" />
-                        </div>
+                    <RefreshCw size={16} className={loading ? 'spin' : ''} />
+                    Sync Account
+                </motion.button>
+            </header>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+
+                {/* Main Balance Card */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="card"
+                    style={{
+                        gridColumn: 'span 1',
+                        background: 'linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%)',
+                        position: 'relative',
+                        overflow: 'hidden'
+                    }}
+                >
+                    <div style={{ position: 'absolute', top: '-20px', right: '-20px', opacity: 0.05 }}>
+                        <IndianRupee size={200} />
                     </div>
 
-                    <button onClick={fetchBalance} className="btn" style={{ background: 'rgba(255,255,255,0.1)', fontSize: '0.8rem', padding: '8px 16px' }}>
-                        <RefreshCw size={14} className={loading ? 'spin' : ''} /> Refresh
-                    </button>
+                    <div style={{ position: 'relative', zIndex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '32px' }}>
+                            <div style={{ background: 'var(--primary-glow)', padding: '10px', borderRadius: '12px' }}>
+                                <Wallet size={20} color="var(--primary)" />
+                            </div>
+                            <span style={{ color: 'var(--text-muted)', fontWeight: 600, fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Current Balance</span>
+                        </div>
+
+                        <h2 style={{ fontSize: '3.5rem', fontWeight: 800, letterSpacing: '-2px', marginBottom: '16px' }}>
+                            {loading ? <span style={{ opacity: 0.3 }}>••••••</span> : `₹${balance?.toLocaleString('en-IN')}`}
+                        </h2>
+
+                        <div style={{ display: 'flex', gap: '8px', color: 'var(--success)', fontSize: '0.9rem', fontWeight: 600 }}>
+                            <TrendingUp size={18} />
+                            <span>+2.4% this month</span>
+                        </div>
+                    </div>
                 </motion.div>
 
-                {/* Quick Stats Card */}
+                {/* Account Stats */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="glass card"
+                    className="card"
+                    style={{ background: 'var(--surface-alt)' }}
                 >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-                        <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '12px', borderRadius: '12px' }}>
-                            <TrendingUp size={24} color="#10b981" />
-                        </div>
-                        <div>
-                            <h3 style={{ fontWeight: 600 }}>Active Savings</h3>
-                            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Your wealth is growing at 4.5% APY</p>
-                        </div>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                        <div style={{ background: 'rgba(99, 102, 241, 0.1)', padding: '12px', borderRadius: '12px' }}>
-                            <ShieldCheck size={24} color="#6366f1" />
-                        </div>
-                        <div>
-                            <h3 style={{ fontWeight: 600 }}>Secure Account</h3>
-                            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Two-factor authentication is active</p>
-                        </div>
+                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '24px' }}>Market Activity</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                        {stats.map((stat, i) => (
+                            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '16px', borderBottom: i < 2 ? '1px solid var(--glass-border)' : 'none' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                    <div style={{ background: `${stat.color}15`, padding: '8px', borderRadius: '10px' }}>
+                                        <stat.icon size={18} color={stat.color} />
+                                    </div>
+                                    <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{stat.label}</span>
+                                </div>
+                                <span style={{ fontWeight: 700, color: stat.color }}>{stat.value}</span>
+                            </div>
+                        ))}
                     </div>
                 </motion.div>
 
-                {/* Security Card (Visibility for User Token) */}
+                {/* Security Status */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="glass card"
+                    className="card"
+                    style={{ border: '1px solid rgba(16, 185, 129, 0.2)', background: 'rgba(16, 185, 129, 0.02)' }}
                 >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-                        <div style={{ background: 'rgba(168, 85, 247, 0.1)', padding: '12px', borderRadius: '12px' }}>
-                            <ShieldCheck size={24} color="#a855f7" />
+                        <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '12px', borderRadius: '14px' }}>
+                            <ShieldCheck size={24} color="var(--success)" />
                         </div>
                         <div>
-                            <h3 style={{ fontWeight: 600 }}>Security & Session</h3>
-                            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Active authentication token details</p>
+                            <h3 style={{ fontWeight: 700, fontSize: '1.1rem' }}>BankKod Guard</h3>
+                            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Your account is fully protected.</p>
                         </div>
                     </div>
-                    <div style={{ background: 'rgba(0,0,0,0.2)', padding: '12px', borderRadius: '8px', border: '1px solid var(--glass-border)' }}>
-                        <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '1px' }}>Current User Token</p>
-                        <code style={{ fontSize: '0.75rem', color: '#a855f7', wordBreak: 'break-all', opacity: 0.8 }}>
-                            {user ? `JWT ${user.email?.split('@')[0]}_session_active` : 'No active token'}
-                            <br />
-                            <span style={{ color: 'var(--success)', fontSize: '0.7rem' }}>● Cookie Session Active</span>
-                        </code>
+
+                    <div style={{ background: 'rgba(0,0,0,0.2)', padding: '16px', borderRadius: '16px', border: '1px solid rgba(16, 185, 129, 0.1)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Status</span>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--success)', fontWeight: 700 }}>● SECURE</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Last Sync</span>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--text)' }}>Today, {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
                     </div>
                 </motion.div>
             </div>
 
             {error && (
-                <div className="glass card" style={{ marginTop: '24px', border: '1px solid var(--error)', color: 'var(--error)' }}>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="card" style={{ marginTop: '24px', border: '1px solid var(--error)', color: 'var(--error)', padding: '20px' }}>
                     {error}
-                </div>
+                </motion.div>
             )}
 
             <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .spin {
-          animation: spin 1s linear infinite;
-        }
-      `}</style>
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                .spin {
+                    animation: spin 1s linear infinite;
+                }
+            `}</style>
         </div>
     );
 };
