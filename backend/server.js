@@ -158,8 +158,8 @@ let aiClient;
 (async () => {
     try {
         const { Client } = await import('@gradio/client');
-        aiClient = await Client.connect("hdeepak06/kodbank-ai");
-        console.log('✅ AI Assistant Connected & Ready');
+        aiClient = await Client.connect("CohereLabs/tiny-aya");
+        console.log('✅ AI Assistant (Tiny Aya) Connected & Ready');
     } catch (err) {
         console.error('❌ Failed to connect to AI Assistant:', err);
     }
@@ -167,23 +167,35 @@ let aiClient;
 
 // AI Assistant Route
 app.post("/api/ai-chat", authenticateToken, async (req, res) => {
+    console.log(`AI Chat Request from ${req.user.email}: ${req.body.message}`);
     try {
         const { message } = req.body;
 
         if (!aiClient) {
+            console.error('AI Client not initialized');
             return res.status(503).json({ reply: "AI Assistant is still waking up, please try again in a second." });
         }
 
-        const result = await aiClient.predict("/kodbank_ai", {
+        console.log('Calling AI predict (Tiny Aya)...');
+        const result = await aiClient.predict("/generate", {
             message: message,
+            system_prompt: "You are the official KodBank AI Assistant. Your goal is to help users with their banking needs, explain features like transfers and withdrawals, and provide general financial guidance in a professional yet friendly manner. Keep responses concise and focused on KodBank.",
+            temperature: 0.2,
+            max_new_tokens: 300,
         });
+
+        console.log('AI Response received:', result.data[0]);
 
         res.json({
             reply: result.data[0]
         });
 
     } catch (error) {
-        console.error('AI Error:', error);
+        console.error('AI Error breakdown:', {
+            message: error.message,
+            stack: error.stack,
+            response: error.response?.data
+        });
         res.status(500).json({
             reply: "AI service unavailable"
         });
